@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Login Error</title>
+  <script th:inline="javascript">
+    const urlParams = new URLSearchParams(window.location.search);
+    const errorMessage = urlParams.get('error');
+  </script>
+</head>
+<body onload="displayErrorMessage()">
+<script th:inline="javascript">
+  function displayErrorMessage() {
+    if (errorMessage) {
+      const errorDiv = document.getElementById('error-message');
+      errorDiv.textContent = errorMessage;
+    }
+  }
+</script>
+
+<h1>Login Error</h1>
+
+<div id="error-message"></div>
+
+<p>Please <a href="/api/users/login" methods="get">click here</a> to return to the login page.</p>
+</body>
+</html>

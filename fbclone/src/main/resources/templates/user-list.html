@@ -1,0 +1,33 @@
+<!-- user-list.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User List</title>
+</head>
+<body>
+<h1>User List</h1>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <!-- Add more columns as per your User entity -->
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${user}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.name}"></td>
+        <!-- Add more columns as per your User entity -->
+    </tr>
+    </tbody>
+</table>
+<!-- Add form to create a new user -->
+<form th:action="@{/api/user}" th:object="${user}" method="post">
+    <!-- Add input fields for user attributes -->
+    <input type="text" th:field="*{name}" placeholder="Name" required/>
+    <!-- Add more input fields as per your User entity -->
+    <button type="submit">Create User</button>
+</form>
+</body>
+</html>

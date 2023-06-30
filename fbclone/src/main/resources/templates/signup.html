@@ -1,0 +1,62 @@
+<!-- signup.html -->
+<!--@Column(name = "email", unique = true, nullable = false, length = 100)-->
+<!--private String emailAddress;-->
+<!--@Column(name = "password", nullable = false, length = 100)-->
+<!--private String password;-->
+<!--@Column(name = "firstname", nullable = false, length = 100)-->
+<!--private String firstName;-->
+<!--@Column(name = "surname", nullable = false, length = 100)-->
+<!--private String surname;-->
+<!--@Column(name = "dateofbirth", nullable = false, length = 100)-->
+<!--private LocalDate dateOfBirth;-->
+<!--@Enumerated(EnumType.STRING)-->
+<!--@Column(name = "gender", nullable = false, length = 10)-->
+<!--private Gender gender;-->
+<!--@Column(name = "phonenumber", unique = true, nullable = false, length = 100)-->
+<!--private String phoneNo;-->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Signup</title>
+</head>
+<body>
+<h1>Signup</h1>
+<form th:action="@{/api/users/signup}" method="post" th:object="${user}">
+  <div><label for="email">Email:</label>
+  <input type="email" id="email" name="email" th:field="*{emailAddress}" required>
+  </div>
+  <div>
+  <label for="password">Password:</label>
+  <input type="password" id="password" name="password" th:field="*{password}" required>
+  </div>
+<div>
+  <label for="firstname">FirstName:</label>
+  <input type="text" id="firstname" name="firstname" th:field="*{firstName}" required>
+</div>
+<div>
+  <label for="surname">Surname:</label>
+  <input type="text" id="surname" name="surname" th:field="*{surname}" required>
+</div>
+  <div>
+    <label>Date of Birth:</label>
+    <input type="date" id="birthdate" name="birthdate" th:field="*{dateOfBirth}" required="required" />
+  </div>
+  <div>
+    <label>Gender:</label>
+    <select th:field="*{gender}" required="required">
+      <option value="">-- Select Gender --</option>
+      <option th:value="MALE">Male</option>
+      <option th:value="FEMALE">Female</option>
+      <option th:value="OTHER">Other</option>
+    </select>
+  </div>
+
+  <label for="phone">Phone Number:</label>
+  <input type="text" id="phone" name="phone" th:field="*{phoneNo}" required>
+
+  <button type="submit">Signup</button>
+</form>
+</body>
+</html>

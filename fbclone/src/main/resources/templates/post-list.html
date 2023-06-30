@@ -1,0 +1,27 @@
+<!-- post-list.html -->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Post List</title>
+</head>
+<body>
+<h1>Post List</h1>
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Content</th>
+    <th>Actions</th>
+  </tr>
+  <tr th:each="post : ${posts}">
+    <td th:text="${post.title}"></td>
+    <td th:text="${post.content}"></td>
+    <td>
+      <a th:href="@{/api/post/{id}(id=${post.id})}">View</a>
+      <a th:href="@{/api/post/{id}(id=${post.id})}" th:if="${loggedInUser.id == post.authorId}">Delete</a>
+    </td>
+  </tr>
+</table>
+</body>
+</html>

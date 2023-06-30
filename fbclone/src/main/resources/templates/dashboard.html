@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User Dashboard</title>
+</head>
+<body>
+<h1>Welcome, <span>"${user.country}"</span>!</h1>
+<h2>Create Post</h2>
+<form th:action= "@{/api/post/create-post}" method="post" >
+    <div>
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required>
+    </div>
+    <div>
+        <label for="content">Content:</label>
+        <textarea id="content" name="content" required></textarea>
+    </div>
+    <div>
+        <button type="submit">Create Post</button>
+    </div>
+</form>
+
+<h2>Posts</h2>
+<!-- Display the list of posts and provide a like button for each post -->
+<div th:each="posts : ${post}">
+    <div><h3 th:text="${post.title}"></h3>
+    <p th:text="${post.content}"></p>
+    <i th:text="${post.timestamp}"></i>
+    <button type="button" onclick="likePost(${post.id})">Like</button>
+</div>
+</div>
+<form th:action="@{/api/comment/create-comment/postId}" method="post">
+<!--    <input type="hidden" name="postId" th:value="${post.id}">-->
+    <input type="text" name="comment" placeholder="Enter your comment">
+    <button type="submit">Add Comment</button>
+</form>
+
+<div th:each="comments : ${comment}">
+    <p th:text="${comment.content}"></p>
+    <p th:text="${comment.timestamp}"></p>
+
+<script th:inline="javascript">
+    function likePost(postId) {
+
+        const url = 'api/dolike/add-like/' + postId;
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(response => {
+                if (response.ok) {
+                    const likeButton = document.getElementById('likeButton_' + postId);
+                    likeButton.disabled = true;
+                    likeButton.innerText = 'Liked';
+                } else {
+                    console.error('Failed to like the post.');
+                }
+            })
+            .catch(error => {
+                console.error('An error occurred while liking the post:', error);
+            });
+    }
+</script>
+</div>
+</body>
+</html>

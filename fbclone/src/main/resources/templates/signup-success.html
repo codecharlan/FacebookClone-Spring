@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Signup Successful</title>
+</head>
+<body>
+<h1>Signup Successful</h1>
+<p>Thank you for signing up! </p>
+<p> Your account has been created successfully.</p>
+
+<p>EmailAddress is : <span th:text="${user.emailAddress}"></span></p>
+
+<a href="/api/users/login" methods="get">Click here to login</a>
+</body>
+</html>
